@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="3" total="4" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-10-11T16:36:17 IST" name="Default suite" finished-at="2024-10-11T16:36:33 IST" duration-ms="15749">
+    <groups>
+    </groups>
+    <test started-at="2024-10-11T16:36:17 IST" name="Default test" finished-at="2024-10-11T16:36:33 IST" duration-ms="15749">
+      <class name="runner.Runner">
+        <test-method signature="IBO_registration()[pri:1, instance:runner.Runner@6283d8b8]" started-at="2024-10-11T16:36:17 IST" name="IBO_registration" finished-at="2024-10-11T16:36:32 IST" duration-ms="15676" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- IBO_registration -->
+      </class> <!-- runner.Runner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
