@@ -2,12 +2,12 @@
 <testng-results ignored="3" total="4" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-11T16:36:17 IST" name="Default suite" finished-at="2024-10-11T16:36:33 IST" duration-ms="15749">
+  <suite started-at="2024-10-18T12:18:18 IST" name="Default suite" finished-at="2024-10-18T12:18:53 IST" duration-ms="34670">
     <groups>
     </groups>
-    <test started-at="2024-10-11T16:36:17 IST" name="Default test" finished-at="2024-10-11T16:36:33 IST" duration-ms="15749">
+    <test started-at="2024-10-18T12:18:18 IST" name="Default test" finished-at="2024-10-18T12:18:53 IST" duration-ms="34670">
       <class name="runner.Runner">
-        <test-method signature="IBO_registration()[pri:1, instance:runner.Runner@6283d8b8]" started-at="2024-10-11T16:36:17 IST" name="IBO_registration" finished-at="2024-10-11T16:36:32 IST" duration-ms="15676" status="PASS">
+        <test-method signature="IBO_registration()[pri:1, instance:runner.Runner@20ccf40b]" started-at="2024-10-18T12:18:19 IST" name="IBO_registration" finished-at="2024-10-18T12:18:53 IST" duration-ms="34585" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- IBO_registration -->

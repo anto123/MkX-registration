@@ -54,6 +54,11 @@ public class elements {
 		public static String user_Hidden="//ul[@id='ui-id-1']//li";
 		public static String search="//input[@type='submit']";
 		public static String submit="//button[text()='Submit']";
+		//id //select[@id='id_sponsor_change']//Change Sponsor
+		public static String new_sponsor="//input[@name='new_sponsor']";
+		public static String sponsor_choose="//ul[@class='sponsor-option-results search-select-options']";
+		public static String placement_text="//input[@name='parent_nid']";
+		public static String choose_placement="//ul[@class='parent-option-results search-select-options']";
 		
 		//founder club
 		

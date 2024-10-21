@@ -19,13 +19,13 @@ public class Runner extends Browser_initiate{
 	@Test(priority = 1)
 	
 	public void IBO_registration() throws InterruptedException, IOException {
-		Browser_initiate.setItUp("customer");
+		Browser_initiate.setItUp("ibo");
         Registration obj=new Registration(driver);
-		//obj.IBORegistration();
-		obj.customerRegistration();
+    	//obj.IBORegistration();
+	     obj.customerRegistration();
 //		Browser_initiate.setItUp("admin");
-//		obj.adminlog();	
-//		obj.holding_Tank();
+//    	obj.adminlog();	
+//    	obj.holding_Tank();
 		}
 	@Test(enabled = false)
 	public void login_user() throws InterruptedException {

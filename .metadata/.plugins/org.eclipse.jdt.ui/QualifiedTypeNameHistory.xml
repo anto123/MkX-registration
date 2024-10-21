@@ -36,6 +36,7 @@
     <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Row"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+    <fullyQualifiedTypeName name="com.google.common.collect.Table.Cell"/>
     <fullyQualifiedTypeName name="Pageelement.elements"/>
     <fullyQualifiedTypeName name="Pageelement.webelement"/>
 </qualifiedTypeNameHistroy>

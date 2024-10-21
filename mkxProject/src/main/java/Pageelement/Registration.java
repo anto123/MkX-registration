@@ -3,17 +3,17 @@ package Pageelement;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.lang.model.util.Elements;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
+
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +21,7 @@ import org.openqa.selenium.logging.LogLevelMapping;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.github.javafaker.Faker;
+import org.apache.poi.ss.usermodel.Cell;
 
 import Browserlaunch.Browser_initiate;
 
@@ -31,6 +32,9 @@ public class Registration extends Browser_initiate {
 	protected static String getusername;
 	protected static String firstnameuser;
 	protected static String lastnameuser;
+	private Properties properties;
+	//private static final String EXCEL_FILE_PATH = "/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/main/java/resorce/data.xlsx";
+    //private static final String PROPERTIES_FILE_PATH = "/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/test/java/runner/registrationdata.properties";
 
 	// Constructor
 	public Registration(WebDriver driver) {
@@ -38,7 +42,7 @@ public class Registration extends Browser_initiate {
 	}
 
 	public void selectAccept() {
-		webelement.wait(2000);
+		webelement.wait(1500);
 		if (webelement.isDisplay(elements.close)) {
 			webelement.click(elements.close);
 		} else {
@@ -90,7 +94,8 @@ public class Registration extends Browser_initiate {
 		}
 	}
 
-	public void holding_Tank() {
+	public static void holding_Tank() throws IOException {
+		
 		webelement.wait(3500);
 		webelement.click(elements.team);
 		webelement.click(elements.manage_team);
@@ -102,23 +107,53 @@ public class Registration extends Browser_initiate {
 		userField.sendKeys(firstnameuser);
 		webelement.wait(4000);
 		try {
-			// Wait for the element to be visible (you might need to add explicit wait here)
-			// Find the option by its visible text
 			WebElement option = driver.findElement(By.xpath("//ul[@id='ui-id-1']//li"));
-
-			// Click the option
 			option.click();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Close the driver
+		
 			System.out.println("sucess");
 		}
 		webelement.click(elements.search);
-		webelement.selectDropDownOption("id_binary_position", "Bottom Right");
-		// Bottom Left
-		webelement.click(elements.submit);
+		//if need no changes
+		//placement right
+				//webelement.selectDropDownOption("id_binary_position", "Bottom Right");
+				// Bottom Left
+		//webelement.click(elements.submit);
+		sponsor_choose();
 	}
+		//choosing sponsor change
+		public static void sponsor_choose() throws IOException {
+			FileInputStream file = new FileInputStream("/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/test/java/runner/registrationdata.properties");
+			Properties ps = new Properties();
+			ps.load(file);
+			String new_sponsor = ps.getProperty("newsponsor");
+			String incomecenters = ps.getProperty("incomecenters");
+			webelement.wait(1500);
+			webelement.selectDropDownOption("id_sponsor_change", "Change Sponsor");
+			//if need income centers
+			//webelement.selectDropDownOption("Income Center", incomecenters);
+			webelement.click(elements.new_sponsor);
+			webelement.send(elements.new_sponsor, new_sponsor);
+			webelement.wait(2000);
+			webelement.click(elements.sponsor_choose);
+			placemet_user();
+		}
+		
+	 
+		public static void placemet_user() throws IOException {
+			FileInputStream file = new FileInputStream("/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/test/java/runner/registrationdata.properties");
+			Properties ps = new Properties();
+			ps.load(file);
+			String new_parent = ps.getProperty("newplacement");
+			webelement.click(elements.placement_text);
+			webelement.send(elements.placement_text, new_parent);
+			webelement.click(elements.choose_placement);
+			webelement.selectDropDownOption("id_spilling_preference", "Left Spilling");
+			webelement.click(elements.submit);
+		}
+
 
 	public String getUser() {
 		WebElement user = driver.findElement(By.xpath(elements.userName));
@@ -148,7 +183,7 @@ public class Registration extends Browser_initiate {
 //ibo registration
 	public void IBORegistration() throws InterruptedException, IOException {
 		webelement.wait(1000);
-		selectAccept();
+		//selectAccept();
         FileInputStream file = new FileInputStream("/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/test/java/runner/registrationdata.properties");
 		Properties ps = new Properties();
 		ps.load(file);
@@ -182,8 +217,10 @@ public class Registration extends Browser_initiate {
 //        WebElement bronze=driver.findElement(By.xpath(elements.bronzeButton));
 //        webelement.scrollByjavaScriptExecutor(driver, bronze);
 		webelement.wait(2500);
+		
+		
 		webelement.click(elements.feepro_Package);
-		// webelement.click(elements.founder_package);
+		//webelement.click(elements.founder_package);
 		webelement.click(elements.proceedToButton);
 		webelement.wait(2500);
 		webelement.send(elements.billing, billingaddress_data);
@@ -202,10 +239,14 @@ public class Registration extends Browser_initiate {
 		System.out.println("Registration successful");
 
 	}
+	
+	   
 //customer registration page
 	public void customerRegistration() throws InterruptedException, IOException {
-		selectAccept();
+		webelement.wait(1500);
+		//selectAccept();
 
+        // Retrieve the properties
 		FileInputStream excelFile = new FileInputStream(
 				"/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/main/java/resorce/data.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
@@ -219,7 +260,7 @@ public class Registration extends Browser_initiate {
 		Row row = sheet.getRow(targetRowIndex);
 		if (row != null) {
 			
-			String sponsor_name = row.getCell(sponsorColumnIndex) != null
+			String sponsor = row.getCell(sponsorColumnIndex) != null
 					? row.getCell(sponsorColumnIndex).getStringCellValue()
 					: "";
 			String password = row.getCell(passwordColumnIndex) != null
@@ -229,7 +270,7 @@ public class Registration extends Browser_initiate {
 					? row.getCell(confirm_passwordcolumnIntex).getStringCellValue()
 					: "";
 			// Send username to the input field
-			driver.findElement(By.xpath(elements.sponsor)).sendKeys(sponsor_name);
+			driver.findElement(By.xpath(elements.sponsor)).sendKeys(sponsor);
 			firstname1();
 			lastname1();
 			driver.findElement(By.xpath(elements.userName)).sendKeys("user" + (new Random().nextInt(100000) + 1));
@@ -244,7 +285,7 @@ public class Registration extends Browser_initiate {
 			driver.findElement(By.xpath(elements.confirmPassword)).sendKeys(confirm_password);
 			driver.findElement(By.xpath(elements.agreeTermCondition)).click();
 			driver.findElement(By.xpath(elements.signupButton)).click();
-
+  
 		}
 
 		// Close the workbook and file input stream
