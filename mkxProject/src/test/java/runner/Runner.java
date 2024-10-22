@@ -21,8 +21,8 @@ public class Runner extends Browser_initiate{
 	public void IBO_registration() throws InterruptedException, IOException {
 		Browser_initiate.setItUp("ibo");
         Registration obj=new Registration(driver);
-    	//obj.IBORegistration();
-	     obj.customerRegistration();
+    	obj.IBORegistration();
+	   //  obj.customerRegistration();
 //		Browser_initiate.setItUp("admin");
 //    	obj.adminlog();	
 //    	obj.holding_Tank();
@@ -58,5 +58,15 @@ public class Runner extends Browser_initiate{
 		obj1.membership_package_user();
 		obj1.membership_package_upgrade_user();
 		obj1.founder_club_upgrade_user();
+	}
+	@Test(enabled=false)
+	public void registrationpractice() throws IOException, InterruptedException {
+		Registration iboregister= new Registration(driver);
+		iboregister.userregistrationexcel();
+	}
+	@Test(enabled = false)
+	public void customerregexcel() throws IOException {
+		Registration customerregister = new Registration(driver);
+		customerregister.customerregexcel();
 	}
 }

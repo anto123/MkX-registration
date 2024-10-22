@@ -19,8 +19,17 @@ import org.openqa.selenium.By;
 
 
 public class webelement extends Browser_initiate{
+	   // protected static WebDriver driver;
+	    
+	    public static void setDriver(WebDriver webDriver) {
+	        driver = webDriver;
+	    }
 		public static void click(String locator) {
 			driver.findElement(By.xpath(locator)).click();
+		}
+		
+		public static void id(String locator) {
+			driver.findElement(By.xpath("//input[@id='" + locator + "']")).click();
 		}
 
 		public static void clear(String locator) {

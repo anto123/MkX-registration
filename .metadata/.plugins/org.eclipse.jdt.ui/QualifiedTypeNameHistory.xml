@@ -4,7 +4,6 @@
     <fullyQualifiedTypeName name="org.openqa.selenium.edge.EdgeDriver"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeOptions"/>
-    <fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeDriver"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="Browserlaunch.BrowserInitiate"/>
@@ -19,15 +18,12 @@
     <fullyQualifiedTypeName name="org.openqa.selenium.remote.DesiredCapabilities"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.Platform"/>
-    <fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="Browserlaunch.Browserlaun"/>
-    <fullyQualifiedTypeName name="Pageelement.Registration"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
     <fullyQualifiedTypeName name="Browserlaunch.Browser_initiate"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.By"/>
     <fullyQualifiedTypeName name="Pageelement.Business"/>
-    <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.logging.LogLevelMapping"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="java.util.Properties"/>
@@ -39,4 +35,8 @@
     <fullyQualifiedTypeName name="com.google.common.collect.Table.Cell"/>
     <fullyQualifiedTypeName name="Pageelement.elements"/>
     <fullyQualifiedTypeName name="Pageelement.webelement"/>
+    <fullyQualifiedTypeName name="Pageelement.Registration"/>
+    <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
+    <fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
+    <fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeDriver"/>
 </qualifiedTypeNameHistroy>
