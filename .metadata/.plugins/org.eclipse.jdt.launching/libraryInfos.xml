@@ -2,5 +2,5 @@
 <libraryInfos>
     <libraryInfo home="/home/eps46-epixel/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.2.v20240123-0840/jre" version="21.0.2"/>
     <libraryInfo home="/home/eps46-epixel/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.2.v20240123-0840" version="21.0.2"/>
-    <libraryInfo home="/usr/lib/jvm/java-11-openjdk-amd64" version="11.0.24"/>
+    <libraryInfo home="/usr/lib/jvm/java-11-openjdk-amd64" version="11.0.25"/>
 </libraryInfos>

@@ -2,11 +2,16 @@ package Pageelement;
 
 import java.util.Properties;
 import java.util.Random;
-
+import org.testng.Assert;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -23,7 +28,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.github.javafaker.Faker;
 import org.apache.poi.ss.usermodel.Cell;
-
+import org.openqa.selenium.JavascriptExecutor;
 import Browserlaunch.Browser_initiate;
 
 public class Registration extends Browser_initiate {
@@ -54,8 +59,8 @@ public class Registration extends Browser_initiate {
 
 	public void adminlog() {
 		webelement.wait(2500);
-		selectAccept();
-		webelement.wait(1500);
+		//selectAccept();
+		//webelement.wait(1500);
 		webelement.click(elements.username_login);
 		webelement.send(elements.username_login, "mkx-business-admin");
 		WebElement passwordField = driver.findElement(By.xpath(elements.password_login));
@@ -96,6 +101,18 @@ public class Registration extends Browser_initiate {
 		}
 	}
 
+    public void testUpdateCardDetailDisplay() {
+        // Call the method
+    	assertionforgracepperiod();
+    }
+	public static void assertionforgracepperiod() {
+		 boolean isDisplayed = webelement.isDisplay(elements.cardUpdate);
+	    // Assert that the cardUpdate element is displayed
+		 Assert.assertTrue(isDisplayed);
+	    // If the assertion passes, proceed with the clicks
+	    webelement.click(elements.cardUpdate);
+	    webelement.click(elements.yesOption);
+	}
 	public void holding_Tank() throws IOException {
 
 		webelement.wait(3500);
@@ -120,12 +137,314 @@ public class Registration extends Browser_initiate {
 		webelement.click(elements.search);
 		// if need no changes
 		// placement right
-		// webelement.selectDropDownOption("id_binary_position", "Bottom Right");
+		 webelement.selectDropDownOption("id_binary_position", "Bottom Right");
 		// Bottom Left
-		// webelement.click(elements.submit);
-		sponsor_choose();
+		 webelement.click(elements.submit);
+		 
+		 //we need change any sponsor
+		//sponsor_choose();
+		 
+		 
+		 //we need change date for grace period
+		 date_change();
+		
 	}
+public void holdingtanknosponsorchangeexcel() throws IOException {
+	
+	FileInputStream excelFile = new FileInputStream(
+			"/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/main/java/resorce/data.xlsx");
+	XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+	Sheet sheet = workbook.getSheetAt(2); // Get the first sheet
+	Sheet sheet1 = workbook.getSheetAt(0);
+	int targetRowIndex = 1;
+	int urlColumnIndex = 0;
+    int firstnamecoulumnindex =1;
+	Row row = sheet.getRow(targetRowIndex);
+	Row row1 = sheet1.getRow(targetRowIndex);
+	if (row != null && row1 != null) {
 
+		String url = row.getCell(urlColumnIndex) != null
+				? row.getCell(urlColumnIndex).getStringCellValue()
+				: "";
+		String firstname = getCellValue(row1, firstnamecoulumnindex); 
+		 
+		WebDriver driver = new ChromeDriver();
+	    webelement.setDriver(driver);
+         driver.manage().window().maximize();
+         webelement.wait(1500);
+		driver.get(url);
+		adminlog();
+		webelement.wait(3500);
+		webelement.click(elements.team);
+		webelement.click(elements.manage_team);
+		webelement.wait(1000);
+		webelement.click(elements.holding_Tank);
+		webelement.wait(3500);
+		webelement.click(elements.filter);
+		WebElement userField = driver.findElement(By.xpath(elements.user));
+		userField.click();
+		userField.sendKeys(firstname);
+		webelement.wait(4000);
+		try {
+			WebElement option = driver.findElement(By.xpath("//ul[@id='ui-id-1']//li"));
+			option.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			System.out.println("sucess");
+		}
+		webelement.click(elements.search);
+		// if need no changes
+		// placement right
+		 webelement.selectDropDownOption("id_binary_position", "Bottom Right");
+		// Bottom Left
+		// webelement.selectDropDownOption("id_binary_position", "Bottom Left");
+		 webelement.click(elements.submit);
+	}
+}
+	
+public void holdingsponsorchangenoplacement() throws IOException {
+	FileInputStream excelFile = new FileInputStream(
+			"/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/main/java/resorce/data.xlsx");
+	XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+	Sheet sheet = workbook.getSheetAt(2); // Get the first sheet
+	Sheet sheet1 = workbook.getSheetAt(0);
+	int targetRowIndex = 1;
+	int urlColumnIndex = 0;
+	int firstnamecoulumnindex =1;
+	int newsponsorcolumnIndex = 1;
+	int newplacementcolumnIndex = 2;
+	int incomecenterscolumnIndex = 3;
+
+	Row row = sheet.getRow(targetRowIndex);
+	Row row1 = sheet1.getRow(targetRowIndex);
+	if (row != null && row1 !=null) {
+
+		String url = row.getCell(urlColumnIndex) != null
+				? row.getCell(urlColumnIndex).getStringCellValue()
+				: "";
+		
+		String firstname = getCellValue(row1, firstnamecoulumnindex);
+		String new_sponsor = getCellValue(row, newsponsorcolumnIndex);
+      
+		    
+		WebDriver driver = new ChromeDriver();
+	    webelement.setDriver(driver);
+         driver.manage().window().maximize();
+         webelement.wait(1500);
+		driver.get(url);
+		adminlog();
+		webelement.wait(3500);
+		webelement.click(elements.team);
+		webelement.click(elements.manage_team);
+		webelement.wait(1000);
+		webelement.click(elements.holding_Tank);
+		webelement.wait(3500);
+		webelement.click(elements.filter);
+		WebElement userField = driver.findElement(By.xpath(elements.user));
+		userField.click();
+		userField.sendKeys(firstname);
+		webelement.wait(4000);
+		try {
+			WebElement option = driver.findElement(By.xpath("//ul[@id='ui-id-1']//li"));
+			option.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			System.out.println("sucess");
+		}
+		webelement.click(elements.search);
+		webelement.wait(1500);
+		webelement.selectDropDownOption("id_sponsor_change", "Change Sponsor");
+		// if need income centers
+		// webelement.selectDropDownOption("Income Center", incomecenters);
+		webelement.click(elements.new_sponsor);
+		webelement.send(elements.new_sponsor, new_sponsor);
+		webelement.wait(2000);
+		webelement.click(elements.sponsor_choose);
+		// if need no changes
+				// placement right
+				 webelement.selectDropDownOption("id_binary_position", "Bottom Right");
+				// Bottom Left
+				 webelement.click(elements.submit);
+	}
+}
+
+public void incomecenterchangenoplacement() throws IOException {
+	FileInputStream excelFile = new FileInputStream(
+			"/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/main/java/resorce/data.xlsx");
+	XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+	Sheet sheet = workbook.getSheetAt(2); // Get the first sheet
+	Sheet sheet1 = workbook.getSheetAt(0);
+	int targetRowIndex = 1;
+	int urlColumnIndex = 0;
+	int firstnamecoulumnindex =1;
+	int newsponsorcolumnIndex = 1;
+	int newplacementcolumnIndex = 2;
+	int incomecenterscolumnIndex = 3;
+
+	Row row = sheet.getRow(targetRowIndex);
+	Row row1 = sheet1.getRow(targetRowIndex);
+	if (row != null && row1 !=null) {
+
+		String url = row.getCell(urlColumnIndex) != null
+				? row.getCell(urlColumnIndex).getStringCellValue()
+				: "";
+		String firstname = getCellValue(row1, firstnamecoulumnindex);
+		String new_sponsor = getCellValue(row, newsponsorcolumnIndex);
+        String placement = getCellValue(row, newplacementcolumnIndex);
+        String income_centers = getCellValue(row, incomecenterscolumnIndex);
+		    
+		WebDriver driver = new ChromeDriver();
+	    webelement.setDriver(driver);
+         driver.manage().window().maximize();
+         webelement.wait(1500);
+		driver.get(url);
+		adminlog();
+		webelement.wait(3500);
+		webelement.click(elements.team);
+		webelement.click(elements.manage_team);
+		webelement.wait(1000);
+		webelement.click(elements.holding_Tank);
+		webelement.wait(3500);
+		webelement.click(elements.filter);
+		WebElement userField = driver.findElement(By.xpath(elements.user));
+		userField.click();
+		userField.sendKeys(firstname);
+		webelement.wait(4000);
+		try {
+			WebElement option = driver.findElement(By.xpath("//ul[@id='ui-id-1']//li"));
+			option.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			System.out.println("sucess");
+		}
+		webelement.click(elements.search);
+		webelement.wait(1500);
+		// if need income centers
+	   webelement.selectDropDownOption("id_sponsor_change", "Income Center");
+		webelement.click(elements.new_sponsor);
+		webelement.send(elements.new_sponsor, income_centers);
+		webelement.wait(2000);
+		webelement.click(elements.sponsor_choose);
+		// if need no changes
+				// placement right
+				 webelement.selectDropDownOption("id_binary_position", "Bottom Right");
+				// Bottom Left
+				 webelement.click(elements.submit);
+	}
+}
+public void holdingplacementchange() throws IOException {
+	FileInputStream excelFile = new FileInputStream(
+			"/home/eps46-epixel/Desktop/MKxProject/mkxProject/src/main/java/resorce/data.xlsx");
+	XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+	Sheet sheet = workbook.getSheetAt(2); // Get the first sheet
+	Sheet sheet1 = workbook.getSheetAt(0);
+	int targetRowIndex = 1;
+	int firstnamecoulumnindex =1;
+	int urlColumnIndex = 0;
+	int newsponsorcolumnIndex = 1;
+	int newplacementcolumnIndex = 2;
+	int incomecenterscolumnIndex = 3;
+
+	Row row = sheet.getRow(targetRowIndex);
+	Row row1 = sheet1.getRow(targetRowIndex);
+	if (row != null && row1 !=null) {
+
+		String url = row.getCell(urlColumnIndex) != null
+				? row.getCell(urlColumnIndex).getStringCellValue()
+				: "";
+		String firstname = getCellValue(row1, firstnamecoulumnindex);
+		String new_sponsor = getCellValue(row, newsponsorcolumnIndex);
+        String new_parent = getCellValue(row, newplacementcolumnIndex);
+        String sponsor = getCellValue(row, incomecenterscolumnIndex);
+		    
+		WebDriver driver = new ChromeDriver();
+	    webelement.setDriver(driver);
+         driver.manage().window().maximize();
+         webelement.wait(1500);
+		driver.get(url);
+		adminlog();
+		webelement.wait(3500);
+		webelement.click(elements.team);
+		webelement.click(elements.manage_team);
+		webelement.wait(1000);
+		webelement.click(elements.holding_Tank);
+		webelement.wait(3500);
+		webelement.click(elements.filter);
+		WebElement userField = driver.findElement(By.xpath(elements.user));
+		userField.click();
+		userField.sendKeys(firstname);
+		webelement.wait(4000);
+		try {
+			WebElement option = driver.findElement(By.xpath("//ul[@id='ui-id-1']//li"));
+			option.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			System.out.println("sucess");
+		}
+		webelement.click(elements.search);
+		webelement.wait(1500);
+		webelement.selectDropDownOption("id_sponsor_change", "Change Sponsor");
+		// if need income centers
+		// webelement.selectDropDownOption("Income Center", incomecenters);
+		webelement.click(elements.new_sponsor);
+		webelement.send(elements.new_sponsor, new_sponsor);
+		webelement.wait(2000);
+		webelement.click(elements.sponsor_choose);
+		webelement.click(elements.placement_text);
+		webelement.send(elements.placement_text, new_parent);
+		webelement.click(elements.choose_placement);
+		webelement.selectDropDownOption("id_spilling_preference", "Left Spilling");
+		webelement.click(elements.submit);
+		
+	}
+}
+	public void date_change() {
+		
+		 //date change scenario
+		 webelement.wait(5500);
+		 WebElement element = driver.findElement(By.xpath(elements.setting_Menu));
+
+        // Scroll to the element
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
+        // Use JavaScript to click
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+		// webelement.click(elements.setting_Menu);
+		 webelement.click(elements.maintenance);
+		 webelement.click(elements.developer_Settings);
+
+		 // Locate the date field
+		 WebElement dateField = driver.findElement(By.id("id_datetime"));
+		 String currentDateValue = dateField.getAttribute("value");
+		 System.out.println("current date"+currentDateValue);
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+		// Parse the current date from the input field
+		LocalDateTime currentDateTime = LocalDateTime.parse(currentDateValue, formatter);
+
+		// Add one year to the current date
+		LocalDateTime newDateTime = currentDateTime.plusYears(1);
+
+		// Format the new date back to a string
+		String newDateFormatted = newDateTime.format(formatter);
+
+		// Print the new date
+		System.out.println("Date after one year: " + newDateFormatted);
+		// Use JavaScript to update the value of the date field
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].value = arguments[1];", dateField, newDateFormatted);
+		
+		 webelement.click(elements.save_button);
+	
+	}
 	// choosing sponsor change
 	public static void sponsor_choose() throws IOException {
 		FileInputStream file = new FileInputStream(
@@ -321,19 +640,23 @@ public class Registration extends Browser_initiate {
              driver.manage().window().maximize();
              webelement.wait(1500);
 			driver.get(url);
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elements.sponsor)));
 			driver.findElement(By.xpath(elements.sponsor)).sendKeys(sponsor);
-//			firstname1();
-//			lastname1();
-//			String firstname1= firstname1();
-//			String lastname1=lastname1();
-			webelement.wait(1000);
+			 webelement.wait(1000);
 			 driver.findElement(By.xpath(elements.firstName)).sendKeys(firstname);
 		     driver.findElement(By.xpath(elements.lastName)).sendKeys(lastname);
-			driver.findElement(By.xpath(elements.userName)).sendKeys("user" + (new Random().nextInt(100000) + 1));
+		     String prefix = "username";
+		        int randomNumber = new Random().nextInt(100000) + 1; // Generates a random number between 1 and 100,000
+		        String username = prefix + randomNumber; // Concatenates "user" with the random number
+
+		        // Print the generated username
+		        System.out.println("Generated Username: " + username);
+		        driver.findElement(By.xpath(elements.userName)).sendKeys(username);
 			driver.findElement(By.xpath(elements.emailAddress))
 					.sendKeys("antony" + (new Random().nextInt(100000) + 1) + "@gmail.com");
 			driver.findElement(By.xpath(elements.domain)).sendKeys("domain" + (new Random().nextInt(100000) + 1));
-			webelement.wait(500);
+			webelement.wait(1000);
 			driver.findElement(By.xpath(elements.country)).click();
 			driver.findElement(By.xpath(elements.India)).click();
 			webelement.wait(1000);
@@ -359,6 +682,7 @@ public class Registration extends Browser_initiate {
 			webelement.click(elements.billingState);
 			webelement.click(elements.stateDrop);
 			webelement.click(elements.checkout);
+			webelement.wait(1000);
 			webelement.click(elements.testPayment);
 			webelement.wait(2500);
 			webelement.selectDropDownOption("id_status", "Confirmed");
@@ -432,14 +756,17 @@ public class Registration extends Browser_initiate {
 	}
 
 	public void login() {
-		selectAccept();
-		driver.findElement(By.xpath(elements.username_login)).sendKeys("");
+		//selectAccept();
+		driver.findElement(By.xpath(elements.username_login)).sendKeys("user54475");
 		driver.findElement(By.xpath(elements.password_login)).sendKeys("As@12345");
 		webelement.click(elements.signIn);
+		UpdateCardDetailDisplay();
+		webelement.wait(1500);
+		
 	}
 
 	public void random_user() {
-		selectAccept();
+		//selectAccept();
 //        WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elements.username_login)));
 //        usernameField.sendKeys(usr);
 		webelement.click(elements.username_login);
@@ -450,8 +777,97 @@ public class Registration extends Browser_initiate {
 		signInButton.click();
 		UpdateCardDetailDisplay();
 		webelement.wait(1500);
+		driver.navigate().refresh();
 	}
 
+	public void graceperiod_wait() {
+		webelement.wait(100000);
+		driver.navigate().refresh();
+		testUpdateCardDetailDisplay();
+	}
+	
+	public void days_change() {
+		
+		 webelement.wait(5500);
+		 WebElement element = driver.findElement(By.xpath(elements.setting_Menu));
+
+        // Scroll to the element
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
+        // Use JavaScript to click
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+		// webelement.click(elements.setting_Menu);
+		 webelement.click(elements.maintenance);
+		 webelement.click(elements.developer_Settings);
+
+		WebElement dateField = driver.findElement(By.id("id_datetime"));
+		String currentDateValue = dateField.getAttribute("value");
+		System.out.println("Current date: " + currentDateValue);
+
+		// Define the date formattestUpdateCardDetailDisplay
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+		// Parse the current date from the input field
+		LocalDateTime currentDateTime = LocalDateTime.parse(currentDateValue, formatter);
+
+		// Add 5 days to the current date
+		LocalDateTime newDateTime = currentDateTime.plusDays(25);
+
+		// Format the new date back to a string
+		String newDateFormatted = newDateTime.format(formatter);
+
+		// Print the new date
+		System.out.println("Date after 25 days: " + newDateFormatted);
+
+		// Use JavaScript to update the value of the date field
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].value = arguments[1];", dateField, newDateFormatted);
+
+		// Click the save button
+		webelement.click(elements.save_button);
+	}
+	
+	public void days_changeinactive() {
+		
+		 webelement.wait(5500);
+		 WebElement element = driver.findElement(By.xpath(elements.setting_Menu));
+
+       // Scroll to the element
+       ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
+       // Use JavaScript to click
+       ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+		// webelement.click(elements.setting_Menu);
+		 webelement.click(elements.maintenance);
+		 webelement.click(elements.developer_Settings);
+
+		WebElement dateField = driver.findElement(By.id("id_datetime"));
+		String currentDateValue = dateField.getAttribute("value");
+		System.out.println("Current date: " + currentDateValue);
+
+		// Define the date format
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+		// Parse the current date from the input field
+		LocalDateTime currentDateTime = LocalDateTime.parse(currentDateValue, formatter);
+
+		// Add 5 days to the current date
+		LocalDateTime newDateTime = currentDateTime.plusDays(5);
+
+		// Format the new date back to a string
+		String newDateFormatted = newDateTime.format(formatter);
+
+		// Print the new date
+		System.out.println("Date after 5 days: " + newDateFormatted);
+
+		// Use JavaScript to update the value of the date field
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].value = arguments[1];", dateField, newDateFormatted);
+
+		// Click the save button
+		webelement.click(elements.save_button);
+	}
+	
 	public void customerregexcel() throws IOException {
 	    // Declare variables
 	    Sheet sheet = null;
@@ -505,7 +921,13 @@ public class Registration extends Browser_initiate {
 	            webelement.wait(1000);
 	            driver.findElement(By.xpath(elements.firstName)).sendKeys(firstname);
 	            driver.findElement(By.xpath(elements.lastName)).sendKeys(lastname);
-	            driver.findElement(By.xpath(elements.userName)).sendKeys("user" + (new Random().nextInt(100000) + 1));
+	            String prefix = "username";
+		        int randomNumber = new Random().nextInt(100000) + 1; // Generates a random number between 1 and 100,000
+		        String username = prefix + randomNumber; // Concatenates "user" with the random number
+
+		        // Print the generated username
+		        System.out.println("Generated Username: " + username);
+		        driver.findElement(By.xpath(elements.userName)).sendKeys(username);
 	            driver.findElement(By.xpath(elements.emailAddress))
 	                    .sendKeys("antony" + (new Random().nextInt(100000) + 1) + "@gmail.com");
 

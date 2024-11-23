@@ -21,7 +21,6 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="Browserlaunch.Browserlaun"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
-    <fullyQualifiedTypeName name="Browserlaunch.Browser_initiate"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.By"/>
     <fullyQualifiedTypeName name="Pageelement.Business"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.logging.LogLevelMapping"/>
@@ -33,10 +32,16 @@
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
     <fullyQualifiedTypeName name="com.google.common.collect.Table.Cell"/>
-    <fullyQualifiedTypeName name="Pageelement.elements"/>
-    <fullyQualifiedTypeName name="Pageelement.webelement"/>
-    <fullyQualifiedTypeName name="Pageelement.Registration"/>
-    <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeDriver"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="Pageelement.elements"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="Browserlaunch.Browser_initiate"/>
+    <fullyQualifiedTypeName name="Pageelement.Registration"/>
+    <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
+    <fullyQualifiedTypeName name="Pageelement.webelement"/>
+    <fullyQualifiedTypeName name="java.time.Duration"/>
 </qualifiedTypeNameHistroy>

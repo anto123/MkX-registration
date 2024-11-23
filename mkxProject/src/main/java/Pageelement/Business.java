@@ -57,7 +57,7 @@ public class Business extends Browser_initiate {
 		webelement.click(elements.membership_package);
 		// MKX wealth
 		webelement.click(elements.mkx_wealth_edit);
-		webelement.wait(1500);
+		webelement.wait(3500);
 		webelement.click(elements.product_specification);
 		webelement.wait(800);
 		webelement.clear(elements.volume_points);
@@ -75,7 +75,7 @@ public class Business extends Browser_initiate {
 		// MKX Exclusive
 		webelement.wait(2000);
 		webelement.click(elements.mkx_exclusive_edit);
-		webelement.wait(1500);
+		webelement.wait(2500);
 		webelement.click(elements.product_specification);
 		webelement.wait(800);
 		webelement.clear(elements.volume_points2);
@@ -102,6 +102,7 @@ public class Business extends Browser_initiate {
 		webelement.click(elements.checkout_Button);
 		webelement.wait(2500);
 		webelement.click(elements.checkout_Button);
+		webelement.wait(1000);
 		webelement.click(elements.testPayment);
 		webelement.wait(2500);
 		webelement.selectDropDownOption("id_status", "Confirmed");

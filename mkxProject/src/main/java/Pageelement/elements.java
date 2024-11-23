@@ -137,6 +137,11 @@ public class elements {
         public static String upgrade_volume_points="//input[@id='id_calculation_criteria__percentage_of_vp_2']";
         public static String elegible_customeribp="//select[@name='calculation_criteria__customer_ibo_packages_2']";
         
+        //date change format
+        public static String setting_Menu="//li[@m-menu-dropdown-toggle-class='m-aside-menu-overlay--on'][8]//span[text()='Settings']";
+        public static String maintenance="//span[text()='Maintenance']";
+        public static String developer_Settings="//span[text()='Developer Settings']";
+        public static String save_button="//button[@name='submit']";
         
         
 }

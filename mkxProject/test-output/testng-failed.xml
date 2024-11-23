@@ -5,7 +5,7 @@
     <classes>
       <class name="runner.Runner">
         <methods>
-          <include name="IBO_registration"/>
+          <include name="ibo_registration"/>
         </methods>
       </class> <!-- runner.Runner -->
     </classes>
